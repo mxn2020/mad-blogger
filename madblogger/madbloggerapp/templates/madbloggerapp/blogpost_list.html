@@ -1,0 +1,25 @@
+<!-- blogpost_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Post List</title>
+</head>
+<body>
+    <h1>Blog Post List</h1>
+    <ul>
+        <!-- Loop through the blog posts and display them as list items -->
+        {% for blogpost in blogposts %}
+            <li>
+                <a href="/view/{{ blogpost.id }}/">{{ blogpost.title }}</a> - {{ blogpost.date }}
+                <a href="/edit/{{ blogpost.id }}/">Edit</a>
+                <form method="POST" action="/delete/{{ blogpost.id }}/" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/create/">Create</a>
+</body>
+</html>

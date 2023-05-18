@@ -16,7 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from madbloggerapp.views import UserAPIView, AuthorAPIView, BlogPostAPIView, CategoryAPIView, create_blogpost, blogpost_list, view_blogpost, delete_blogpost, edit_blogpost
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    path('create/', create_blogpost, name='create_blogpost'),
+    path('list/', blogpost_list, name='blogpost_list'),
+    path('view/<int:blogpost_id>/', view_blogpost, name='view_blogpost'),
+    path('delete/<int:blogpost_id>/', delete_blogpost, name='delete_blogpost'),
+    path('edit/<int:blogpost_id>/', edit_blogpost, name='edit_blogpost'),
+
+
+    # Other URL patterns
+    path('api/users/', UserAPIView.as_view(), name='user-api'),
+    path('api/authors/', AuthorAPIView.as_view(), name='author-api'),
+    path('api/blogposts/', BlogPostAPIView.as_view(), name='blogpost-api'),
+    path('api/categories/', CategoryAPIView.as_view(), name='category-api'),
+
+
 ]
